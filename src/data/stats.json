@@ -1,0 +1,6 @@
+[
+  { "id": 1, "label": "Enseignants", "count": "26", "icon": "📚" },
+  { "id": 2, "label": "Doctorants", "count": "64", "icon": "🎓" },
+  { "id": 3, "label": "Publications", "count": "+60", "icon": "📝" },
+  { "id": 4, "label": "Partenariats", "count": "12", "icon": "🌍" }
+]

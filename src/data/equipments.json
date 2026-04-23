@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Calcul Haute Performance",
+    "desc": "Le laboratoire dispose d'une station Lambda Vector équipée de deux GPU NVIDIA RTX A6000 (96 Go VRAM), d'un processeur Threadripper Pro (16 cœurs) et de 256 Go de RAM, optimisée sous Ubuntu Lambda Stack pour les projets complexes d'IA."
+  },
+  {
+    "id": 2,
+    "name": "Unités de Recherche Mobiles",
+    "desc": "Un parc de 10 ordinateurs portables Dell XPS haute performance (Intel i7/i9, 32 Go de RAM, écrans UHD+) est dédié aux chercheurs pour le traitement intensif des données et la simulation en mobilité."
+  },
+  {
+    "id": 3,
+    "name": "Infrastructure de Modélisation",
+    "desc": "Le laboratoire est équipé de 20 stations de bureau (Core i7, 16 Go RAM) dédiées au développement logiciel et à la modélisation mathématique, interconnectées par un réseau local à 10 Gbps et une connectivité Wi-Fi 6."
+  }
+]
