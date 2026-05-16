@@ -1,310 +1,204 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import { supabase } from "./supabaseClient";
+import React, { useState, useEffect } from "react";
+import "./App.css";
 
+/* =========================================================
+   HOOKS (PocketBase data layer)
+========================================================= */
+import { useStats } from "./hooks/useStats";
+import { useLeadership } from "./hooks/useLeadership";
+import { useTeams } from "./hooks/useTeams";
+import { useEquipments } from "./hooks/useEquipments";
+import { useNews } from "./hooks/useNews";
+import { useAxes } from "./hooks/useAxes";
+import { useProjects } from "./hooks/useProjects";
+import { usePartners } from "./hooks/usePartners";
+import { useContact } from "./hooks/useContact";
 
-/* IMPORT DATA FROM ./data */
-import STATS_DATA from "./data/stats.json";
-import LAB_LEADERSHIP from "./data/leadership.json";
-import TEAMS_DATA from "./data/teams.json";
-import EQUIPMENTS_DATA from "./data/equipments.json";
-import EVENTS_DATA from "./data/events.json";
-import PROJECTS_DATA from "./data/projects.json";
-
-/* IMPORT COMPONENTS FROM ./components*/
+/* =========================================================
+   COMPONENTS
+========================================================= */
 import Navbar from "./components/navbar.jsx";
 import Hero from "./components/hero.jsx";
 import Stats from "./components/stats.jsx";
 import Leadership from "./components/leadership.jsx";
 import Teams from "./components/teams.jsx";
-import Equipments from "./components/equipments.jsx"
-import Events from "./components/events";
+import Equipments from "./components/equipments.jsx";
+import News from "./components/news.jsx";
 import Axes from "./components/axes.jsx";
 import Projects from "./components/projects.jsx";
 import Partners from "./components/partners.jsx";
 import Contact from "./components/contact.jsx";
 import Footer from "./components/footer.jsx";
 
-/* ----------------------------------------------------------------------------------------- */
-/* STATES */
+/* ================= MODALS ================= */
+import ProjectModal from "./modals/ProjectModal.jsx";
+import TeamModal from "./modals/TeamModal.jsx";
+import ReservationModal from "./modals/ReservationModal.jsx";
+import NewsModal from "./modals/NewsModal.jsx";
+
 function App() {
+  /* =========================================================
+     UI STATE
+  ========================================================= */
   const [isScrolled, setIsScrolled] = useState(false);
   const [showReservationForm, setShowReservationForm] = useState(false);
+
+  /* =========================================================
+     MODAL STATE
+  ========================================================= */
   const [selectedProject, setSelectedProject] = useState(null);
   const [selectedTeam, setSelectedTeam] = useState(null);
-  const [formData, setFormData] = useState({
-      name: "",
-        email: "",
-        institution: "",
-        role: "",
-        project:"",
-        startDate:"",
-        motivation:"",
-  });
+  const [selectedNews, setSelectedNews] = useState(null);
 
-/* ----------------------------------------------------------------------------------------- */
-/* EFFECTS*/
-useEffect(() => {
-  const handleScroll = () => {
-    setIsScrolled(window.scrollY > 50);
-  };
+  /* =========================================================
+     DATA (PocketBase CMS)
+  ========================================================= */
+  const { stats, loading: statsLoading } = useStats();
+  const { leadership, loading: leadershipLoading } = useLeadership();
+  const { teams, loading: teamsLoading } = useTeams();
+  const { equipments, loading: equipmentsLoading } = useEquipments();
+  const { news, loading: newsLoading } = useNews();
+  const { axes, loading: axesLoading } = useAxes();
+  const { projects, loading: projectsLoading } = useProjects();
+  const { partners, loading: partnersLoading } = usePartners();
+  const { contact, loading: contactLoading } = useContact();
 
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, []);
+  /* =========================================================
+     SCROLL EFFECT
+  ========================================================= */
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
 
-/* ----------------------------------------------------------------------------------------- */
-/* HANDLERS */
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-/* Handle input changes in reservation form */
-const handleChange = (e) => {
-  setFormData(prev => ({
-  ...prev,
-  [e.target.name]: e.target.value
-}));
-};
+  /* =========================================================
+     SAFETY: normalize leadership structure
+  ========================================================= */
+  const normalizedLeadership = Array.isArray(leadership)
+    ? leadership[0]
+    : leadership;
 
-/* Handle form submission to Supabase */
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  /* =========================================================
+     MODAL CONTROLS
+  ========================================================= */
+  const closeProject = () => setSelectedProject(null);
+  const closeTeam = () => setSelectedTeam(null);
+  const closeReservation = () => setShowReservationForm(false);
 
-  console.log("Sending:", formData);
+  /* =========================================================
+     RENDER
+  ========================================================= */
+  return (
+    <div className="spa-wrapper">
 
-  const { data, error } = await supabase
-    .from("accreditation_requests")
-    .insert([formData]);
-
-  console.log("Supabase response:", { data, error });
-
-  if (error) {
-    alert(error.message); // 👈 IMPORTANT
-  } else {
-    alert("Demande envoyée ✅");
-  }
-};
-
-return (
-  <div className="spa-wrapper">
-
-  {/* form modal */}
-{showReservationForm && (
-  <div className="modal-overlay" onClick={() => setShowReservationForm(false)}>
-    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-      
-      <span className="close-modal" onClick={() => setShowReservationForm(false)}>
-        &times;
-      </span>
-
-      <h2 className="section-title">Formulaire d’accréditation du laboratoire</h2>
-
-      <form className="reservation-form" onSubmit={handleSubmit}>
-
-        <input
-          type="text"
-          name="name"
-          placeholder="Nom complet"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Email universitaire"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          type="text"
-          name="institution"
-          placeholder="Établissement / Université"
-          value={formData.institution}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          type="text"
-          name="role"
-          placeholder="Statut (Doctorant, Enseignant, Chercheur...)"
-          value={formData.role}
-          onChange={handleChange}
-          required
-        />
-
-        <input
-          type="text"
-          name="project"
-          placeholder="Projet de recherche / Sujet"
-          value={formData.project}
-          onChange={handleChange}
-          required
-        />
-
-
-        <label className="form-label">Date de début souhaitée</label>
-        <input
-          type="date"
-          name="startDate"
-          value={formData.startDate}
-          onChange={handleChange}
-          required
-        />
-
-        <textarea
-          name="motivation"
-          placeholder="Motivation / Description de la demande"
-          value={formData.motivation}
-          onChange={handleChange}
-          rows="4"
-          required
-        />
-
-        <button type="submit" className="pdf-btn">
-          Soumettre la demande
-        </button>
-
-      </form>
-    </div>
-  </div>
-)}
-
-
-     {/* TEAM MODAL */}
-     {selectedTeam && (
-     <div className="modal-overlay" onClick={() => setSelectedTeam(null)}>
-     <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-     <span className="close-modal" onClick={() => setSelectedTeam(null)}> &times; </span>
-     <div className="proj-tag">{selectedTeam.acronym}</div>
-     <div>
-         <p><strong>Responsable:</strong> {selectedTeam.leader}</p>
-         <ul>
-            {selectedTeam.members.map((m, i) => (
-            <li key={i}>{m}</li>
-            ))}
-         </ul>
-     </div>
-     </div>
-     </div>
-)}
-       
-       {/* PROJECTS MODAL */}
-       {selectedProject && (
-       <div className="modal-overlay" onClick={() => setSelectedProject(null)}>
-       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-       <span className="close-modal" onClick={() => setSelectedProject(null)}> &times; </span>
-
-        {/* META SECTION */}
-        <div className="modal-body">
-        <div className="meta-grid">
-        <div className="meta-item">
-           <span className="meta-label">Journal /Livre /Conférence</span>
-           <span className="meta-value">{selectedProject.journal}</span>
-        </div>
-        <div className="meta-item">
-           <span className="meta-label">Autheur</span>
-           <span className="meta-value">{selectedProject.authors}</span>
-        </div>
-
-        <div className="meta-item">
-           <span className="meta-label">Année</span>
-           <span className="meta-value">{selectedProject.year}</span>
-        </div>
-
-        <div className="meta-item">
-           <span className="meta-label">Volume (Issue)</span>
-           <span className="meta-value">
-               {selectedProject.volume} ({selectedProject.issue})
-           </span>
-        </div>
-
-        <div className="meta-item">
-           <span className="meta-label">Pages</span>
-           <span className="meta-value">{selectedProject.pages}</span>
-        </div>
-
-        <div className="meta-item full">
-           <span className="meta-label">Indexing</span>
-           <span className="meta-value">{selectedProject.indexing}</span>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
-)}
-
-
-      {/* NAVBAR */}
+      {/* ================= NAVBAR ================= */}
       <Navbar isScrolled={isScrolled} />
 
-      {/* HERO SECTION */}
+      {/* ================= HERO ================= */}
       <Hero setShowReservationForm={setShowReservationForm} />
 
-      {/* STATS SECTION */}
-      <Stats STATS_DATA={STATS_DATA} />
-      
-{/* ---------------------------------------------------------------------------------------------- */}
-      {/* ABOUT US SECTION */}
+      {/* ================= RESERVATION MODAL ================= */}
+      <ReservationModal
+        isOpen={showReservationForm}
+        onClose={closeReservation}
+      />
+
+      {/* ================= PROJECT MODAL ================= */}
+      <ProjectModal
+        project={selectedProject}
+        onClose={closeProject}
+      />
+
+      {/* ================= TEAM MODAL ================= */}
+      <TeamModal
+        team={selectedTeam}
+        onClose={closeTeam}
+      />
+
+      {/* ================= STATS ================= */}
+      {statsLoading ? (
+        <p style={{ textAlign: "center" }}>Loading stats...</p>
+      ) : (
+        <Stats STATS_DATA={stats} />
+      )}
+
       <section className="section-padding">
-  
-      {/* LEADERSHIP / DIRECTION */}
-      <Leadership LAB_LEADERSHIP={LAB_LEADERSHIP} />
 
-      {/* TEAMS */}
-      <Teams 
-          TEAMS_DATA={TEAMS_DATA}
-          setSelectedTeam={setSelectedTeam}
-      />
+        {/* ================= LEADERSHIP ================= */}
+        {leadershipLoading ? (
+          <p style={{ textAlign: "center" }}>Loading leadership...</p>
+        ) : (
+          normalizedLeadership && (
+            <Leadership LAB_LEADERSHIP={normalizedLeadership} />
+          )
+        )}
 
-      {/* 🔹 EQUIPEMENTS */}
-      <Equipments EQUIPMENTS_DATA={EQUIPMENTS_DATA} />
+        {/* ================= TEAMS ================= */}
+        {teamsLoading ? (
+          <p style={{ textAlign: "center" }}>Loading teams...</p>
+        ) : (
+          <Teams
+            TEAMS_DATA={teams}
+            setSelectedTeam={setSelectedTeam}
+          />
+        )}
+
+        {/* ================= EQUIPMENTS ================= */}
+        {equipmentsLoading ? (
+          <p style={{ textAlign: "center" }}>Loading equipments...</p>
+        ) : (
+          <Equipments EQUIPMENTS_DATA={equipments} />
+        )}
+
       </section>
-{/* ------------------------------------------------------------------------------------------------ */}
-      {/* 6. EVENTS SECTION */}
-      <Events EVENTS_DATA={EVENTS_DATA} />
 
-{/* ------------------------------------------------------------------------------------------------ */}
-      {/* 6. RESEARCH FIELDS */}
-      <Axes />
+      <section className="section-padding">
+      {/* ================= NEWS ================= */}
+{newsLoading ? (
+  <p style={{ textAlign: "center" }}>Loading news...</p>
+) : (
+  <News news={news} setSelectedNews={setSelectedNews} />
+)}
 
-      {/* SCIENTIFIC PRODUCTION */}
-      <Projects 
-          PROJECTS_DATA={PROJECTS_DATA}
-          setSelectedProject={setSelectedProject}
+<NewsModal
+  news={selectedNews}
+  onClose={() => setSelectedNews(null)}
+/>
+     </section>
+
+      {/* ================= AXES ================= */}
+      {axesLoading ? (
+        <p style={{ textAlign: "center" }}>Loading axes...</p>
+      ) : (
+        <Axes axes={axes} />
+      )}
+
+      {/* ================= PROJECTS ================= */}
+      <Projects
+        projects={projects}
+        setSelectedProject={setSelectedProject}
       />
-      {/* PARTNERS */}
-      <Partners />
 
-{/* ----------------------------------------------------------------------------------------------- */}
-      {/* 8. CONTACT SECTION */}
-      <Contact />
+      {/* ================= PARTNERS ================= */}
+      {partnersLoading ? (
+        <p style={{ textAlign: "center" }}>Loading partners...</p>
+      ) : (
+        <Partners partners={partners} />
+      )}
 
-{/* ----------------------------------------------------------------------------------------------- */}
-      {/* 9. FOOTER */}
-      <Footer/>
+      {/* ================= CONTACT ================= */}
+      {contactLoading ? (
+        <p style={{ textAlign: "center" }}>Loading contact...</p>
+      ) : (
+        <Contact contact={contact} />
+      )}
+
+      {/* ================= FOOTER ================= */}
+      <Footer />
     </div>
   );
 }
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

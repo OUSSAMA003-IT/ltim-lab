@@ -7,7 +7,7 @@ function Hero({ setShowReservationForm }) {
         </h1>
 
         <p className="hero-intro">
-          Pôle d'excellence en Intelligence Artificielle et Génie Logiciel, rattaché à la Faculté des Sciences Ben M'sik.
+          Un centre de recherche de la Faculté des Sciences Ben M’sik dédié aux systèmes intelligents, au Big Data et aux technologies numériques avancées.
         </p>
 
         <div className="hero-cta-group">
@@ -15,7 +15,7 @@ function Hero({ setShowReservationForm }) {
             className="cta-btn"
             onClick={() => setShowReservationForm(true)}
           >
-            Demander une accréditation
+            Demander Une Accréditation
           </button>
 
           <div className="social-sidebar">

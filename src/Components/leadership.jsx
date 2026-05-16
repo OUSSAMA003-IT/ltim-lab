@@ -1,4 +1,6 @@
 function Leadership({ LAB_LEADERSHIP }) {
+  if (!LAB_LEADERSHIP) return null;
+
   return (
     <div id="direction" className="container">
       <h2 className="section-title">Direction du laboratoire</h2>

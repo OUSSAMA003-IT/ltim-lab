@@ -1,6 +1,6 @@
 function Equipments({ EQUIPMENTS_DATA }) {
   return (
-    <div id="equipements" className="container" style={{ marginTop: "80px" }}>
+    <div id="equipements" className="container" >
       <h2 className="section-title">Équipements</h2>
 
       <div className="equipments-grid">

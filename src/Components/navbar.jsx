@@ -31,7 +31,7 @@ function Navbar({ isScrolled }) {
             </div>
           </div>
 
-          <a href="#events" onClick={() => setIsOpen(false)}>Événements</a>
+          <a href="#news" onClick={() => setIsOpen(false)}>Actualités</a>
 
           <div className="dropdown">
             <button className="dropbtn" type="button">Recherche</button>
@@ -50,3 +50,5 @@ function Navbar({ isScrolled }) {
 }
 
 export default Navbar;
+
+

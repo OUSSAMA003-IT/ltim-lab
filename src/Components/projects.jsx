@@ -1,47 +1,117 @@
 import { useState } from "react";
 
-function Projects({ PROJECTS_DATA, setSelectedProject }) {
-  /* STATES */
+function Projects({ projects, setSelectedProject }) {
+  /* =========================================================
+     FILTER STATES
+     Controls UI filtering behavior
+  ========================================================= */
   const [selectedCategory, setSelectedCategory] = useState("publication");
   const [selectedYear, setSelectedYear] = useState("all");
+  const [selectedResearcher, setSelectedResearcher] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
 
-  /* CATEGORY LABELS */
+  /* =========================================================
+     CATEGORY LABELS (UI DISPLAY ONLY)
+  ========================================================= */
   const CATEGORY_LABELS = {
     publication: "Publication",
     book: "Livre",
-    conference: "Conférence"
+    conference: "Conférence",
   };
 
-  /* EXTRACT UNIQUE YEARS (as strings for consistency) */
-  const uniqueYears = ["all", ...new Set(PROJECTS_DATA.map(p => String(p.year)))]
-    .sort((a, b) => b.localeCompare(a));
+  /* =========================================================
+     SAFE DATA FALLBACK
+  ========================================================= */
+  const safeProjects = projects || [];
 
-  /* FILTER LOGIC */
-  const filteredProjects = PROJECTS_DATA.filter((p) => {
+  /* =========================================================
+     YEARS FILTER OPTIONS
+  ========================================================= */
+  const uniqueYears = [
+    "all",
+    ...new Set(safeProjects.map((p) => String(p.year || ""))),
+  ].sort((a, b) => (a === "all" ? -1 : b.localeCompare(a)));
+
+  /* =========================================================
+     RESEARCHERS (FIXED VERSION)
+     - removes duplicates
+     - ignores case differences
+     - keeps nice display name
+  ========================================================= */
+  const researcherMap = new Map();
+
+  safeProjects.forEach((p) => {
+    if (!p.authors) return;
+
+    p.authors.split(",").forEach((a) => {
+      const clean = a.trim();
+      if (!clean) return;
+
+      const key = clean.toLowerCase();
+
+      if (!researcherMap.has(key)) {
+        researcherMap.set(key, clean);
+      }
+    });
+  });
+
+  const uniqueResearchers = [
+    "all",
+    ...Array.from(researcherMap.values()).sort(),
+  ];
+
+  /* =========================================================
+     SEARCH NORMALIZATION
+  ========================================================= */
+  const search = searchTerm.toLowerCase().trim();
+
+  /* =========================================================
+     FILTER LOGIC
+  ========================================================= */
+  const filteredProjects = safeProjects.filter((p) => {
+    /* CATEGORY */
     const categoryMatch = p.category === selectedCategory;
 
+    /* YEAR */
     const yearMatch =
       selectedYear === "all" || String(p.year) === selectedYear;
 
-    return categoryMatch && yearMatch;
+    /* RESEARCHER (FIXED: case-safe + consistent matching) */
+    const researcherMatch =
+      selectedResearcher === "all" ||
+      (p.authors &&
+        p.authors
+          .split(",")
+          .map((a) => a.trim().toLowerCase())
+          .includes(selectedResearcher.toLowerCase()));
+
+    /* SEARCH */
+    const searchMatch =
+      search === "" ||
+      (p.title && p.title.toLowerCase().includes(search)) ||
+      (p.authors && p.authors.toLowerCase().includes(search));
+
+    return categoryMatch && yearMatch && researcherMatch && searchMatch;
   });
 
+  /* LIMIT RESULTS (performance + UX) */
   const visibleProjects = filteredProjects.slice(0, 30);
 
   return (
     <section
       id="projects"
       className="section-padding"
-      style={{ backgroundColor: "#080808" }}
+      style={{ backgroundColor: "#050505" }}
     >
       <div className="container">
+
+        {/* ================= TITLE ================= */}
         <h2 className="section-title">
-          Projets de Recherche<span>.</span>
+          Projets de Recherche
         </h2>
 
-        {/* FILTERS */}
-        <div className="filter-container">
-
+        {/* ================= CATEGORY FILTER ================= */}
+        <div className="category-container">
           <button
             onClick={() => setSelectedCategory("publication")}
             className={selectedCategory === "publication" ? "active" : ""}
@@ -62,8 +132,12 @@ function Projects({ PROJECTS_DATA, setSelectedProject }) {
           >
             Conférences
           </button>
+        </div>
 
-          {/* YEAR DROPDOWN */}
+        {/* ================= SUB FILTERS ================= */}
+        <div className="subfilter-container">
+
+          {/* YEAR */}
           <select
             value={selectedYear}
             onChange={(e) => setSelectedYear(e.target.value)}
@@ -75,10 +149,28 @@ function Projects({ PROJECTS_DATA, setSelectedProject }) {
               </option>
             ))}
           </select>
+
+          {/* RESEARCHER */}
+          <select
+            value={selectedResearcher}
+            onChange={(e) => setSelectedResearcher(e.target.value)}
+            className="year-dropdown"
+          >
+            <option value="all">Tous les chercheurs</option>
+
+            {uniqueResearchers
+              .filter((r) => r !== "all")
+              .map((researcher, i) => (
+                <option key={i} value={researcher}>
+                  {researcher}
+                </option>
+              ))}
+          </select>
         </div>
 
-        {/* SLIDER */}
+        {/* ================= PROJECT LIST ================= */}
         <div className="projects-wrapper">
+
           <button
             className="scroll-btn"
             onClick={() =>
@@ -122,14 +214,14 @@ function Projects({ PROJECTS_DATA, setSelectedProject }) {
           </button>
         </div>
 
-        {/* EMPTY STATE */}
+        {/* ================= EMPTY STATE ================= */}
         {visibleProjects.length === 0 && (
           <p style={{ marginTop: "20px", textAlign: "center", color: "#aaa" }}>
             Aucun projet pour cette sélection.
           </p>
         )}
-      </div>
 
+      </div>
     </section>
   );
 }

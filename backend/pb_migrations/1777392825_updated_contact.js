@@ -1,0 +1,20 @@
+/// <reference path="../pb_data/types.d.ts" />
+migrate((app) => {
+  const collection = app.findCollectionByNameOrId("pbc_3711015378")
+
+  // update collection data
+  unmarshal({
+    "name": "contact_info"
+  }, collection)
+
+  return app.save(collection)
+}, (app) => {
+  const collection = app.findCollectionByNameOrId("pbc_3711015378")
+
+  // update collection data
+  unmarshal({
+    "name": "contact"
+  }, collection)
+
+  return app.save(collection)
+})

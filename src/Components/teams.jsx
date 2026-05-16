@@ -1,6 +1,6 @@
 function Teams({ TEAMS_DATA, setSelectedTeam }) {
   return (
-    <div id="teams" className="container" style={{ marginTop: "80px" }}>
+    <div id="teams" className="container">
       <h2 className="section-title">Nos Équipes de Recherche</h2>
 
       <div className="teams-wrapper">
