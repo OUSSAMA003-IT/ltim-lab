@@ -277,6 +277,7 @@ input[type="date"] { color-scheme: dark; font-weight: 600; text-transform: upper
 ========================= */
 @media (max-width: 768px) {
 
+.section-title { font-size: 9px;}
 /* Navbar*/
 .logo { font-size: 1.2rem; font-weight: 900; }
 .hamburger { display: flex; flex-direction: column; justify-content: center; gap: 5px; position: absolute;   /* 🔥 important */ right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer; z-index: 10000; /* above everything */}
