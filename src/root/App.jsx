@@ -17,18 +17,18 @@ import { useContact } from "../hooks/useContact.js";
 /* =========================================================
    COMPONENTS
 ========================================================= */
-import Navbar from "../Components/navbar.jsx";
-import Hero from "../Components/hero.jsx";
-import Stats from "../Components/stats.jsx";
-import Leadership from "../Components/leadership.jsx";
-import Teams from "../Components/teams.jsx";
-import Equipments from "../Components/equipments.jsx";
-import News from "../Components/news.jsx";
-import Axes from "../Components/axes.jsx";
-import Projects from "../Components/projects.jsx";
-import Partners from "../Components/partners.jsx";
-import Contact from "../Components/contact.jsx";
-import Footer from "../Components/footer.jsx";
+import Navbar from "../components/navbar.jsx";
+import Hero from "../components/hero.jsx";
+import Stats from "../components/stats.jsx";
+import Leadership from "../components/leadership.jsx";
+import Teams from "../components/teams.jsx";
+import Equipments from "../components/equipments.jsx";
+import News from "../components/news.jsx";
+import Axes from "../components/axes.jsx";
+import Projects from "../components/projects.jsx";
+import Partners from "../components/partners.jsx";
+import Contact from "../components/contact.jsx";
+import Footer from "../components/footer.jsx";
 
 /* ================= MODALS ================= */
 import ProjectModal from "../modals/ProjectModal.jsx";
