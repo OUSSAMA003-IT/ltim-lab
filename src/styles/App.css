@@ -285,7 +285,7 @@ input[type="date"] { color-scheme: dark; font-weight: 600; text-transform: upper
 .nav-links.open { transform: translateX(0); /* slide in */}
 .nav-links a, .nav-links .dropbtn { width: 100%; display: flex; align-items: center; justify-content: flex-start; font-size: 10px; font-weight: 500; padding: 10px 12px; margin-bottom: 8px; white-space: nowrap; transition: all 0.2s ease;}
 .nav-links a:hover{ background: rgba(56, 189, 248, 0.12); /* accent glow */ border-color: rgba(56, 189, 248, 0.4); transform: translateX(4px); }
-.dropdown { flex: 0 1 auto; display: flex; align-items: center; }
+.dropdown { flex: 0 1 auto; display: flex; align-items: left; }
 
 /* Hero Section */
 .hero-cta-group { display: flex; flex-direction: column; align-items: center; gap: 35px; margin-top: 30px; }
