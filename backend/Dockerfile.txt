@@ -1,0 +1,13 @@
+FROM alpine:latest
+
+WORKDIR /app
+
+# copy files
+COPY pocketbase /app/pocketbase
+COPY pb_data /app/pb_data
+
+# permissions
+RUN chmod +x /app/pocketbase
+
+# PocketBase port (Render uses $PORT)
+CMD sh -c "/app/pocketbase serve --http=0.0.0.0:${PORT:-8090}"
