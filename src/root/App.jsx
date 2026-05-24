@@ -180,7 +180,7 @@ const { contact, loading: contactLoading } = useContact();
         <Axes axes={axes} />
       )}
 
-      {/* ================= PROJECTS ================= */}
+      {/* ================= Scientific Production ================= */}
       <Projects
         projects={projects}
         setSelectedProject={setSelectedProject}
