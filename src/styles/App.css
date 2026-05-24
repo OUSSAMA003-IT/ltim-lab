@@ -271,59 +271,427 @@ input[type="date"] { color-scheme: dark; font-weight: 600; text-transform: upper
 .footer .social-sidebar { display: none; }
 
 
-
-/* =========================
-   MOBILE (≤ 768px)
-========================= */
-@media (max-width: 768px) {
-
-.section-title { font-size: 9px;}
-/* Navbar*/
-.logo { font-size: 1.2rem; font-weight: 900; }
-.hamburger { display: flex; flex-direction: column; justify-content: center; gap: 5px; position: absolute;   /* 🔥 important */ right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer; z-index: 10000; /* above everything */}
-.nav-links { position: fixed; top: 0; right: 0; width: 45%; max-width: 250px; height: 100vh; transform: translateX(100%); /* hidden */ display: flex; flex-direction: column; align-items: flex-start; padding-top: 80px;  padding-left: 5px; padding-bottom: 30px; background: rgba(11, 18, 51, 0.98); backdrop-filter: blur(10px);    transform: translateX(100%); transition: transform 0.35s ease; z-index: 999; }
-.nav-links.open { transform: translateX(0); /* slide in */}
-.nav-links a, .nav-links .dropbtn { width: 100%; display: flex; align-items: center; justify-content: flex-start; font-size: 8px; font-weight: 500; padding: 10px 12px; margin-bottom: 8px; white-space: nowrap; transition: all 0.2s ease;}
-.nav-links a:hover{ background: rgba(56, 189, 248, 0.12); /* accent glow */ border-color: rgba(56, 189, 248, 0.4); transform: translateX(4px); }
-.dropdown { flex: 0 1 auto; display: flex; align-items: center; }
-
-/* Hero Section */
-.hero-cta-group { display: flex; flex-direction: column; align-items: center; gap: 35px; margin-top: 30px; }
-.hero-section { transform:translateY(50px);}
-
-/* Modal Form */
-.modal-content { width: 95vw; max-height: 95vh; padding: 18px 14px; border-radius: 12px; }
-.section-title { font-size: 1rem; text-align: center; }
-.reservation-form { gap: 10px;}
-.reservation-form input,
-.reservation-form textarea { font-size: 0.85rem; padding: 10px 12px; }
-.reservation-form textarea { min-height: 90px;}
-.form-label { font-size: 0.72rem; }
-.reservation-form button { padding: 11px; font-size: 0.9rem; }
-.close-modal { font-size: 1.2rem; top: 10px; right: 10px; }
-
-/* Stats section */
-.stats-bar { transform:translateY(70px); padding: 25px 0; }
-.stats-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 15px; }
-.stat-item { flex-direction: column; text-align: center; border-right: none; gap: 6px; padding: 6px 0; }
-.stat-icon { font-size: 1.3rem; }
-.stat-count { font-size: 1.3rem; }
-.stat-label { font-size: 0.6rem; }
-
-/* Leadership */
-.leadership-row { gap: 15px; }
-.leader-card { min-width: 100%; }
-
-/* Equipment */
-.equipment-card { padding: 25px; }
-
-/* Social media */
-.social-sidebar { display: none; }
-.footer .social-sidebar { display: flex; position: static; flex-direction: row; justify-content: center; margin-top: 20px; } 
+/* ============================================================
+   RESPONSIVE MEDIA QUERIES — LTIM Website
+   Breakpoints:
+     - Mobile S  : ≤ 380px
+     - Mobile    : ≤ 768px
+     - Tablet    : 769px – 1024px
+     - Desktop   : ≥ 1025px  (no changes needed)
+   ============================================================ */
 
 
+/* ============================================================
+   TABLET  (769px – 1024px)
+   ============================================================ */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  /* --- Layout ------------------------------------------------ */
+  .container { padding: 0 6%; }
+  .section-padding { padding: 80px 0; }
+
+  /* --- Social sidebar --------------------------------------- */
+  .social-sidebar { left: 14px; gap: 14px; }
+  .social-sidebar a { width: 40px; height: 40px; font-size: 1.1rem; }
+
+  /* --- Navbar ----------------------------------------------- */
+  .navbar { padding: 22px 0; }
+  .navbar.solid { padding: 12px 0; }
+  .nav-links a,
+  .nav-links button { margin-left: 18px; font-size: 9px; }
+
+  /* --- Hero ------------------------------------------------- */
+  .hero-section { height: 100svh; }
+  .hero-title { font-size: clamp(2rem, 5vw, 3.2rem); }
+  .hero-intro { font-size: 0.95rem; max-width: 560px; }
+
+  /* --- Stats bar -------------------------------------------- */
+  .stats-bar { margin-top: -110px; }
+  .stats-grid { grid-template-columns: repeat(4, 1fr); padding: 12px; gap: 8px; }
+  .stat-item { flex-direction: column; text-align: center; border-right: none; }
+
+  /* --- Leadership ------------------------------------------- */
+  #direction { margin-top: 80px; margin-bottom: 80px; }
+  .leadership-row { gap: 18px; }
+  .leader-card { min-width: 180px; padding: 20px 22px; }
+
+  /* --- Teams ------------------------------------------------ */
+  #teams { margin-bottom: 80px; }
+  .team-card { width: 280px; min-width: 280px; max-width: 280px; padding: 24px; }
+  .team-header h3 { font-size: 1rem; }
+
+  /* --- Axes ------------------------------------------------- */
+  .axes-list { max-width: 680px; gap: 24px; }
+  .axis-item h3 { font-size: 1.1rem; }
+
+  /* --- Projects --------------------------------------------- */
+  .project-card { min-width: 220px; max-width: 260px; min-height: 340px; padding: 24px 18px; }
+
+  /* --- Equipments ------------------------------------------- */
+  .equipments-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .equipment-card { padding: 24px; }
+
+  /* --- Contact ---------------------------------------------- */
+  .contact-triple-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .contact-info-card { padding: 28px 20px; }
+
+  /* --- Partners --------------------------------------------- */
+  .partners-section { padding: 60px 0; }
+
+  /* --- News ------------------------------------------------- */
+  .news-reader-modal { padding: 30px 28px; }
+  .news-reader-title { font-size: 1.4rem; }
 }
 
+
+/* ============================================================
+   MOBILE  (≤ 768px)
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* --- Base ------------------------------------------------- */
+  html { font-size: 15px; }
+  .container { padding: 0 5%; }
+  .section-padding { padding: 70px 0; }
+  .section-title { font-size: 9px; letter-spacing: 4px; margin-bottom: 40px; }
+
+  /* --- Social sidebar: hidden, moved to footer -------------- */
+  .social-sidebar { display: none; }
+  .footer .social-sidebar {
+    display: flex;
+    position: static;
+    transform: none;
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .footer .social-sidebar a { width: 42px; height: 42px; font-size: 1.2rem; }
+
+  /* --- Navbar ----------------------------------------------- */
+  .navbar { padding: 18px 0; }
+  .navbar.solid { padding: 12px 0; }
+  .nav-container { position: relative; padding: 0 5%; }
+  .logo { font-size: 1.2rem; font-weight: 900; }
+
+  /* Hamburger */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10000;
+  }
+  .hamburger span { width: 24px; height: 2px; }
+
+  /* Mobile nav drawer */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 70%;
+    max-width: 280px;
+    height: 100dvh;
+    transform: translateX(100%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 0 40px 20px;
+    gap: 4px;
+    background: rgba(7, 12, 36, 0.98);
+    backdrop-filter: blur(14px);
+    border-left: 1px solid var(--glass-border);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 9999;
+    overflow-y: auto;
+  }
+  .nav-links.open { transform: translateX(0); }
+
+  .nav-links a,
+  .nav-links button {
+    margin-left: 0;
+    width: 100%;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: 12px 10px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+  .nav-links a:hover {
+    background: rgba(56, 189, 248, 0.1);
+    color: #fff;
+    transform: translateX(4px);
+  }
+
+  /* Dropdown inside drawer */
+  .dropdown { width: 100%; }
+  .dropdown-content {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+    background: rgba(255, 255, 255, 0.03);
+    border: none;
+    border-radius: 8px;
+    box-shadow: none;
+    margin-top: 4px;
+    margin-left: 10px;
+  }
+  .dropdown-content a {
+    color: var(--text-dim);
+    font-size: 8px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .dropdown-content a:hover {
+    background: rgba(56, 189, 248, 0.08);
+    color: #fff;
+  }
+
+  /* --- Hero ------------------------------------------------- */
+  .hero-section {
+    height: 100svh;
+    padding-top: 70px;
+    padding-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-title {
+    font-size: clamp(1.8rem, 7.5vw, 2.6rem);
+    transform: translateY(-30px);
+    padding: 0 4%;
+  }
+  .hero-intro {
+    font-size: 0.88rem;
+    padding: 0 2%;
+    margin: 16px auto 30px;
+    transform: translateY(-30px);
+  }
+  .cta-btn {
+    transform: translateY(-30px);
+    padding: 15px 32px;
+    font-size: 10px;
+  }
+  .hero-cta-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  /* --- Stats bar -------------------------------------------- */
+  .stats-bar {
+    margin-top: 0;
+    padding: 20px 0;
+    transform: none;
+  }
+  .stats-bar .container { max-width: 100%; padding: 0 4%; }
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 14px;
+    border-radius: 14px;
+  }
+  .stat-item {
+    flex-direction: column;
+    text-align: center;
+    border-right: none;
+    border-bottom: 1px solid var(--glass-border);
+    gap: 5px;
+    padding: 10px 6px;
+  }
+  .stat-item:nth-child(even),
+  .stat-item:last-child { border-right: none; }
+  .stat-item:nth-last-child(-n+2) { border-bottom: none; }
+  .stat-icon { font-size: 1.3rem; }
+  .stat-count { font-size: 1.25rem; }
+  .stat-label { font-size: 0.58rem; letter-spacing: 1px; }
+
+  /* --- Leadership ------------------------------------------- */
+  #direction { margin-top: 60px; margin-bottom: 60px; }
+  .leadership-row { flex-direction: column; align-items: center; gap: 16px; }
+  .leader-card {
+    width: 100%;
+    max-width: 360px;
+    min-width: unset;
+    padding: 22px 20px;
+  }
+  .leader-card h3 { font-size: 1rem; }
+
+  /* --- Teams ------------------------------------------------ */
+  #teams { margin-bottom: 60px; }
+  .teams-wrapper { gap: 8px; }
+  .scroll-btn { padding: 8px 10px; font-size: 0.9rem; flex-shrink: 0; }
+  .teams-grid { gap: 16px; padding-bottom: 12px; }
+  .team-card {
+    width: 82vw;
+    min-width: 82vw;
+    max-width: 320px;
+    padding: 22px 18px;
+  }
+  .team-header h3 { font-size: 1rem; min-height: auto; }
+  .members-list ul { font-size: 0.82rem; }
+  .view-members-btn { padding: 10px; font-size: 9px; }
+
+  /* Teams Modal */
+  .modal-overlay { padding: 16px; align-items: flex-end; }
+  .modal-content {
+    width: 100%;
+    max-width: 100%;
+    max-height: 85dvh;
+    border-radius: 20px 20px 0 0;
+    padding: 20px 16px;
+    text-align: left;
+  }
+  .modal-content ul { grid-template-columns: 1fr; gap: 10px; }
+  .modal-content li { font-size: 0.88rem; }
+
+  /* --- Axes ------------------------------------------------- */
+  .axes-list { max-width: 100%; gap: 22px; }
+  .axis-item { padding-left: 18px; }
+  .axis-item h3 { font-size: 1.05rem; }
+  .axis-item p { font-size: 0.88rem; }
+
+  /* --- Projects --------------------------------------------- */
+  .projects-wrapper { gap: 8px; }
+  .projects-grid { gap: 16px; padding-bottom: 12px; }
+  .project-card {
+    min-width: 78vw;
+    max-width: 300px;
+    min-height: 320px;
+    padding: 22px 18px;
+    border-radius: 20px;
+  }
+  .proj-tag { font-size: 9px; }
+  .project-card h3 { font-size: 0.92rem; }
+
+  /* Projects Modal */
+  .modal-content {
+    width: 95vw;
+    padding: 28px 20px;
+    border-radius: 18px;
+  }
+  .modal-title { font-size: 1.15rem; }
+  .meta-grid { gap: 12px; }
+  .meta-label { font-size: 10px; }
+  .meta-value { font-size: 13px; }
+  .close-modal { top: 12px; right: 12px; font-size: 1.5rem; }
+
+  /* --- Equipments ------------------------------------------- */
+  .equipments-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 20px; }
+  .equipment-card { padding: 22px 20px; }
+  .equipment-card h3 { font-size: 1.05rem; }
+  .equipment-card p { font-size: 0.88rem; }
+
+  /* --- News ------------------------------------------------- */
+  .news-list { gap: 14px; }
+  .news-card { padding: 16px 14px; }
+  .news-title { font-size: 1rem; }
+  .news-excerpt { font-size: 0.88rem; }
+  .news-date { font-size: 0.75rem; }
+  .news-readmore { font-size: 0.85rem; }
+
+  /* News Reader Modal */
+  .news-reader-overlay { padding: 12px; align-items: flex-end; }
+  .news-reader-modal {
+    width: 100%;
+    max-height: 92dvh;
+    border-radius: 20px 20px 0 0;
+    padding: 28px 18px 32px;
+  }
+  .news-reader-title { font-size: 1.25rem; }
+  .news-reader-date { font-size: 0.65rem; margin-bottom: 18px; }
+  .news-reader-gallery { gap: 10px; }
+  .news-reader-image { max-width: 88vw; border-radius: 10px; }
+  .news-reader-content { font-size: 0.85rem; line-height: 1.7; }
+  .news-reader-close { top: 12px; right: 14px; font-size: 1.5rem; }
+
+  /* --- Reservation Modal ------------------------------------ */
+  .modal-overlay { padding: 0; align-items: flex-end; }
+  .modal-content {
+    width: 100vw;
+    max-height: 92dvh;
+    border-radius: 20px 20px 0 0;
+    padding: 22px 16px 32px;
+  }
+  .reservation-form { gap: 10px; }
+  .reservation-form input,
+  .reservation-form textarea { font-size: 0.85rem; padding: 11px 12px; border-radius: 8px; }
+  .reservation-form textarea { min-height: 90px; }
+  .form-label { font-size: 0.72rem; }
+  .reservation-form button { padding: 12px; font-size: 0.9rem; border-radius: 8px; }
+
+  /* --- Category / subfilter buttons ------------------------- */
+  .category-container { gap: 10px; }
+  .category-container button { padding: 8px 16px; font-size: 10px; }
+  .subfilter-container { gap: 8px; }
+  .year-dropdown { width: 100%; min-width: unset; font-size: 0.68rem; }
+
+  /* --- Partners --------------------------------------------- */
+  .partners-section { padding: 60px 0; }
+  .marquee-wrapper::before,
+  .marquee-wrapper::after { width: 60px; }
+  .partner-pill { padding: 10px 22px; font-size: 0.82rem; }
+
+  /* --- Contact ---------------------------------------------- */
+  .contact-triple-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 30px;
+  }
+  .contact-info-card {
+    padding: 30px 22px;
+    border-radius: 16px;
+  }
+  .contact-info-card h3 { font-size: 12px; }
+  .contact-info-card p { font-size: 0.88rem; }
+  .contact-link { font-size: 0.95rem; }
+
+  /* --- Footer ----------------------------------------------- */
+  .footer { padding: 40px 5%; font-size: 10px; }
+}
+
+
+/* ============================================================
+   MOBILE S  (≤ 380px) — extra-small phones
+   ============================================================ */
+@media (max-width: 380px) {
+
+  html { font-size: 14px; }
+
+  /* Hero */
+  .hero-title { font-size: clamp(1.6rem, 9vw, 2rem); }
+  .hero-intro { font-size: 0.82rem; }
+  .cta-btn { padding: 13px 26px; font-size: 9.5px; }
+
+  /* Stats: single column on very small screens */
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-count { font-size: 1.1rem; }
+  .stat-label { font-size: 0.55rem; }
+
+  /* Teams card fills screen edge-to-edge */
+  .team-card { width: 88vw; min-width: 88vw; }
+  .project-card { min-width: 86vw; }
+
+  /* Nav drawer wider on tiny screen */
+  .nav-links { width: 85%; max-width: 260px; }
+
+  /* Modals */
+  .modal-content { padding: 18px 12px 28px; }
+  .news-reader-modal { padding: 22px 14px 28px; }
+
+  /* Buttons */
+  .category-container button { padding: 7px 13px; font-size: 9px; }
+}
 
 
 
