@@ -1,6 +1,6 @@
 function Leadership({ LAB_LEADERSHIP }) {
-  console.log(LAB_LEADERSHIP);
-  if (!LAB_LEADERSHIP) return null;
+  
+  
 
   return (
     <div id="direction" className="container">
