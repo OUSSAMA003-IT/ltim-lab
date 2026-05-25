@@ -36,7 +36,7 @@ function Navbar({ isScrolled }) {
           <div className="dropdown">
             <button className="dropbtn" type="button">Recherche</button>
             <div className="dropdown-content">
-              <a href="#axes">Axes Stratégiques</a>
+              <a href="#axes">Axes de Recherche</a>
               <a href="#projects">Production scientifique</a>
               <a href="#partners">Partenaires</a>
             </div>

@@ -77,12 +77,7 @@ const { contact, loading: contactLoading } = useContact();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* =========================================================
-     SAFETY: normalize leadership structure
-  ========================================================= */
-  const normalizedLeadership = Array.isArray(leadership)
-    ? leadership[0]
-    : leadership;
+  
 
   /* =========================================================
      MODAL CONTROLS
@@ -134,9 +129,9 @@ const { contact, loading: contactLoading } = useContact();
         {leadershipLoading ? (
           <p style={{ textAlign: "center" }}>Loading leadership...</p>
         ) : (
-          normalizedLeadership && (
-            <Leadership LAB_LEADERSHIP={normalizedLeadership} />
-          )
+          
+            <Leadership LAB_LEADERSHIP={leadership} />
+          
         )}
 
         {/* ================= TEAMS ================= */}
