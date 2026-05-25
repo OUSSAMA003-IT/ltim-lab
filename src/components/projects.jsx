@@ -107,7 +107,7 @@ function Projects({ projects, setSelectedProject }) {
 
         {/* ================= TITLE ================= */}
         <h2 className="section-title">
-          Projets de Recherche
+          Production scientifique
         </h2>
 
         {/* ================= CATEGORY FILTER ================= */}
