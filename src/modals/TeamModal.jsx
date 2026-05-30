@@ -1,5 +1,5 @@
 import { useState } from "react";
-import BiographyModal from "./BiographyModal";
+import BiographyModal from "./biographyModal";
 
 function TeamModal({ team, onClose }) {
   const [bioName, setBioName] = useState(null);
