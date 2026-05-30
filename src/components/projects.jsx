@@ -101,7 +101,7 @@ function Projects({ projects, setSelectedProject }) {
     <section
       id="projects"
       className="section-padding"
-      style={{ backgroundColor: "#050505" }}
+   
     >
       <div className="container">
 

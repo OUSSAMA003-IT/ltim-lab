@@ -2,7 +2,7 @@ function Contact({ contact }) {
   // If data is not loaded yet, avoid crashing UI
   if (!contact) {
     return (
-      <section id="contact" className="section-padding alt-bg">
+      <section id="contact" className="section-padding">
         <div className="container">
           <h2 className="section-title">Contact</h2>
           <p>Loading contact info...</p>
@@ -12,7 +12,7 @@ function Contact({ contact }) {
   }
 
   return (
-    <section id="contact" className="section-padding alt-bg">
+    <section id="contact" className="section-padding">
       <div className="container">
         <h2 className="section-title">Contact</h2>
 

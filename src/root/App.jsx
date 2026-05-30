@@ -33,6 +33,7 @@ import Footer from "../components/footer.jsx";
 /* ================= MODALS ================= */
 import ProjectModal from "../modals/ProjectModal.jsx";
 import TeamModal from "../modals/TeamModal.jsx";
+import BiographyModal from "../modals/biographyModal.jsx";
 import ReservationModal from "../modals/ReservationModal.jsx";
 import NewsModal from "../modals/NewsModal.jsx";
 
