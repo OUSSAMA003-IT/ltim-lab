@@ -1433,7 +1433,7 @@ input[type="date"] {
 
   /* --- Stats bar -------------------------------------------- */
   .stats-bar { margin-top: -110px; }
-  .stats-grid { grid-template-columns: repeat(4, 1fr); padding: 12px; gap: 8px; }
+  .stats-grid { grid-template-columns: repeat(3, 1fr); padding: 12px; gap: 8px; }
   .stat-item { flex-direction: column; text-align: center; border-right: none; }
 
   /* --- Leadership ------------------------------------------- */
@@ -1616,7 +1616,7 @@ input[type="date"] {
   .stats-bar { margin-top: -60px; padding: 20px 0; }
   .stats-bar .container { max-width: 100%; padding: 0 4%; }
   .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 8px;
     padding: 14px;
     border-radius: 14px;
@@ -1768,7 +1768,7 @@ input[type="date"] {
   .cta-btn { padding: 13px 26px; font-size: 9.5px; }
 
   /* --- Stats ------------------------------------------------ */
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-grid { grid-template-columns: repeat(3, 1fr); }
   .stat-count { font-size: 1rem; }
   .stat-label { font-size: 0.5rem; }
 
