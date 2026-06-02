@@ -1463,11 +1463,11 @@ input[type="date"] {
   .project-card { min-width: 220px; max-width: 260px; min-height: 340px; padding: 24px 18px; }
 
   /* --- Equipments ------------------------------------------- */
-  .equipments-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .equipments-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
   .equipment-card { padding: 24px; }
 
   /* --- Contact ---------------------------------------------- */
-  .contact-triple-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .contact-triple-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .contact-info-card { padding: 28px 20px; }
 
   /* --- Partners --------------------------------------------- */
