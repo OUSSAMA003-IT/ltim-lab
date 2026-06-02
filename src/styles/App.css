@@ -1752,6 +1752,18 @@ input[type="date"] {
 
   /* --- Footer ----------------------------------------------- */
   .footer { padding: 40px 5%; font-size: 10px; }
+  /* --- Social sidebar: hidden, moved to footer -------------- */
+  .social-sidebar { display: none; }
+  .footer .social-sidebar {
+    display: flex;
+    position: static;
+    transform: none;
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .footer .social-sidebar a { width: 40px; height: 40px; font-size: 1.1rem; }
 }
 
 
