@@ -1416,9 +1416,18 @@ input[type="date"] {
   .container { padding: 0 6%; }
   .section-padding { padding: 80px 0; }
 
-  * --- Social sidebar --------------------------------------- */
-  .social-sidebar { left: 14px; gap: 14px; }
-  .social-sidebar a { width: 40px; height: 40px; font-size: 1.1rem; }
+  /* --- Social sidebar: hidden, moved to footer -------------- */
+  .social-sidebar { display: none; }
+  .footer .social-sidebar {
+    display: flex;
+    position: static;
+    transform: none;
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .footer .social-sidebar a { width: 42px; height: 42px; font-size: 1.2rem; }
 
   /* --- Navbar ----------------------------------------------- */
   .navbar { padding: 22px 0; }
