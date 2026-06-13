@@ -87,12 +87,6 @@ function Contact({ contact, faqs = defaultFaqs }) {
         <div className="faq-section">
           <div className="faq-header">
             <h3 className="faq-title">Questions fréquentes</h3>
-            <p className="faq-subtitle">
-              Vous ne trouvez pas ce que vous cherchez ?{" "}
-              <a href={`mailto:${contact.email}`} className="faq-contact-link">
-                Écrivez-nous.
-              </a>
-            </p>
           </div>
 
           <div className="faq-list">
