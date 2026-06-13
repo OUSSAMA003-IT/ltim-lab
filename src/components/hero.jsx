@@ -7,7 +7,7 @@ function Hero({ setShowReservationForm }) {
         </h1>
 
         <p className="hero-intro">
-          Un centre de recherche de la Faculté des Sciences Ben M’sik dédié aux systèmes intelligents, au Big Data et aux technologies numériques avancées.
+          Un laboratoire de la Faculté des Sciences Ben M’sik dédié aux systèmes intelligents, au Big Data et aux technologies numériques avancées.
         </p>
 
         <div className="hero-cta-group">
