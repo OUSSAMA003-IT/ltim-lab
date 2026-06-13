@@ -99,7 +99,7 @@ function Contact({ contact, faqs = defaultFaqs }) {
         .faq-section {
           margin-top: 64px;
           padding-top: 56px;
-          border-top: 1px solid var(--border);
+          
         }
 
         .faq-title {
