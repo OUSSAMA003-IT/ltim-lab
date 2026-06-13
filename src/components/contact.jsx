@@ -105,9 +105,9 @@ function Contact({ contact, faqs = defaultFaqs }) {
 
       <style>{`
         .faq-section {
-          margin-top: 3.5rem;
-          padding-top: 3rem;
-          border-top: 1px solid #e5e7eb;
+          margin-top: 64px;
+          padding-top: 56px;
+          border-top: 1px solid var(--border);
         }
 
         .faq-header {
@@ -116,47 +116,60 @@ function Contact({ contact, faqs = defaultFaqs }) {
           justify-content: space-between;
           flex-wrap: wrap;
           gap: 0.5rem;
-          margin-bottom: 1.75rem;
+          margin-bottom: 28px;
         }
 
         .faq-title {
-          font-size: 1.25rem;
-          font-weight: 600;
-          color: #111827;
+          font-size: 10px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 6px;
+          color: var(--accent);
           margin: 0;
+          opacity: 0.9;
         }
 
         .faq-subtitle {
-          font-size: 0.9rem;
-          color: #6b7280;
+          font-size: 0.82rem;
+          color: var(--text-muted);
           margin: 0;
+          letter-spacing: 0.3px;
         }
 
         .faq-contact-link {
-          color: inherit;
-          text-decoration: underline;
+          color: var(--accent);
+          text-decoration: none;
           text-underline-offset: 3px;
+          transition: opacity 0.2s ease;
         }
 
         .faq-contact-link:hover {
-          color: #111827;
+          opacity: 0.75;
+          text-decoration: underline;
         }
 
         .faq-list {
           display: flex;
           flex-direction: column;
           gap: 0;
-          border: 1px solid #e5e7eb;
-          border-radius: 10px;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-lg);
           overflow: hidden;
+          background: var(--bg-card);
+          backdrop-filter: blur(10px);
         }
 
         .faq-item {
-          border-bottom: 1px solid #e5e7eb;
+          border-bottom: 1px solid var(--border);
+          transition: var(--transition);
         }
 
         .faq-item:last-child {
           border-bottom: none;
+        }
+
+        .faq-item--open {
+          border-color: rgba(56, 189, 248, 0.2);
         }
 
         .faq-question {
@@ -165,38 +178,65 @@ function Contact({ contact, faqs = defaultFaqs }) {
           align-items: center;
           width: 100%;
           padding: 1.1rem 1.4rem;
-          background: #fff;
+          background: transparent;
           border: none;
           cursor: pointer;
-          font-size: 0.95rem;
+          font-size: 0.9rem;
           font-weight: 500;
-          color: #111827;
+          color: var(--text-main);
           text-align: left;
           gap: 1rem;
-          transition: background 0.15s ease;
+          font-family: inherit;
+          transition: background var(--transition), color var(--transition);
         }
 
         .faq-question:hover {
-          background: #f9fafb;
+          background: var(--bg-card-hover);
+          color: #fff;
         }
 
         .faq-item--open .faq-question {
-          background: #f9fafb;
+          background: var(--bg-card-hover);
+          color: var(--accent);
         }
 
         .faq-icon {
-          font-size: 1.2rem;
-          color: #6b7280;
+          font-size: 1.1rem;
+          color: var(--accent);
           flex-shrink: 0;
           line-height: 1;
+          filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.35));
         }
 
         .faq-answer {
           padding: 0 1.4rem 1.2rem;
-          font-size: 0.9rem;
-          color: #4b5563;
-          line-height: 1.65;
-          background: #f9fafb;
+          font-size: 0.88rem;
+          color: var(--text-dim);
+          line-height: 1.7;
+          background: var(--bg-card-hover);
+          border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 768px) {
+          .faq-section {
+            margin-top: 40px;
+            padding-top: 36px;
+          }
+          .faq-header {
+            flex-direction: column;
+            gap: 6px;
+          }
+          .faq-question {
+            font-size: 0.85rem;
+            padding: 1rem 1.1rem;
+          }
+          .faq-answer {
+            padding: 0 1.1rem 1rem;
+            font-size: 0.84rem;
+          }
+          .faq-list {
+            border-radius: var(--radius-md);
+          }
         }
       `}</style>
     </section>
