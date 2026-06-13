@@ -1,28 +1,5 @@
 import { useState } from "react";
 
-const defaultFaqs = [
-  {
-    question: "Quels sont vos horaires d'ouverture ?",
-    answer:
-      "Nous sommes disponibles du lundi au vendredi, de 9h à 18h. En dehors de ces horaires, vous pouvez nous laisser un message et nous vous répondrons dans les plus brefs délais.",
-  },
-  {
-    question: "Quel est le délai de réponse moyen ?",
-    answer:
-      "Nous nous engageons à répondre à toutes les demandes dans un délai de 24 à 48 heures ouvrables. Pour les urgences, privilégiez le contact téléphonique.",
-  },
-  {
-    question: "Proposez-vous des consultations à distance ?",
-    answer:
-      "Oui, nous proposons des consultations en visioconférence via Zoom ou Google Meet. Contactez-nous par email pour planifier un créneau.",
-  },
-  {
-    question: "Comment puis-je suivre ma demande ?",
-    answer:
-      "Après chaque échange, vous recevez un récapitulatif par email. N'hésitez pas à y répondre directement pour garder le fil de la conversation.",
-  },
-];
-
 function FaqItem({ question, answer }) {
   const [open, setOpen] = useState(false);
 
@@ -41,7 +18,7 @@ function FaqItem({ question, answer }) {
   );
 }
 
-function Contact({ contact, faqs = defaultFaqs }) {
+function Contact({ contact, faqs = [] }) {
   if (!contact) {
     return (
       <section id="contact" className="section-padding">
@@ -84,18 +61,17 @@ function Contact({ contact, faqs = defaultFaqs }) {
         </div>
 
         {/* FAQ SECTION */}
-        <div className="faq-section">
-          <h3 className="faq-title">Questions fréquentes</h3>
-
-          <div className="faq-list">
-            {faqs.map((faq, i) => (
-              <FaqItem key={i} question={faq.question} answer={faq.answer} />
-            ))}
+        {faqs.length > 0 && (
+          <div className="faq-section">
+            <h3 className="faq-title">Questions fréquentes</h3>
+            <div className="faq-list">
+              {faqs.map((faq) => (
+                <FaqItem key={faq.id} question={faq.question} answer={faq.answer} />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
-
-     
     </section>
   );
 }

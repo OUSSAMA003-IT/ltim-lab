@@ -66,7 +66,7 @@ const { news, loading: newsLoading } = useNews();
 const { axes, loading: axesLoading } = useAxes();
 const { projects, loading: projectsLoading } = useProjects();
 const { partners, loading: partnersLoading } = usePartners();
-const { contact, loading: contactLoading } = useContact();
+const { contact, faqs, loading: contactLoading } = useContact();
 
   /* =========================================================
      SCROLL EFFECT
@@ -193,7 +193,7 @@ const { contact, loading: contactLoading } = useContact();
       {contactLoading ? (
         <p style={{ textAlign: "center" }}>Loading contact...</p>
       ) : (
-        <Contact contact={contact} />
+        <Contact contact={contact} faqs={faqs}/>
       )}
 
       {/* ================= FOOTER ================= */}
