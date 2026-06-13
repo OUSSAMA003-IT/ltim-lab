@@ -116,6 +116,7 @@ function Contact({ contact, faqs = defaultFaqs }) {
         .faq-title {
           font-size: 10px;
           font-weight: 700;
+          text-align: center;
           text-transform: uppercase;
           letter-spacing: 6px;
           color: var(--accent);
