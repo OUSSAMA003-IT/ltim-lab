@@ -85,9 +85,7 @@ function Contact({ contact, faqs = defaultFaqs }) {
 
         {/* FAQ SECTION */}
         <div className="faq-section">
-          <div className="faq-header">
-            <h3 className="faq-title">Questions fréquentes</h3>
-          </div>
+          <h3 className="faq-title">Questions fréquentes</h3>
 
           <div className="faq-list">
             {faqs.map((faq, i) => (
@@ -104,43 +102,15 @@ function Contact({ contact, faqs = defaultFaqs }) {
           border-top: 1px solid var(--border);
         }
 
-        .faq-header {
-          display: flex;
-          align-items: baseline;
-          justify-content: space-between;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-          margin-bottom: 28px;
-        }
-
         .faq-title {
           font-size: 10px;
           font-weight: 700;
-          text-align: center;
           text-transform: uppercase;
           letter-spacing: 6px;
           color: var(--accent);
-          margin: 0;
+          text-align: center;
           opacity: 0.9;
-        }
-
-        .faq-subtitle {
-          font-size: 0.82rem;
-          color: var(--text-muted);
-          margin: 0;
-          letter-spacing: 0.3px;
-        }
-
-        .faq-contact-link {
-          color: var(--accent);
-          text-decoration: none;
-          text-underline-offset: 3px;
-          transition: opacity 0.2s ease;
-        }
-
-        .faq-contact-link:hover {
-          opacity: 0.75;
-          text-decoration: underline;
+          margin: 0 0 28px 0;
         }
 
         .faq-list {
@@ -216,10 +186,6 @@ function Contact({ contact, faqs = defaultFaqs }) {
           .faq-section {
             margin-top: 40px;
             padding-top: 36px;
-          }
-          .faq-header {
-            flex-direction: column;
-            gap: 6px;
           }
           .faq-question {
             font-size: 0.85rem;
