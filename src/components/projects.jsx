@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 function Projects({ projects, setSelectedProject }) {
   /* =========================================================
@@ -9,6 +9,11 @@ function Projects({ projects, setSelectedProject }) {
   const [selectedYear, setSelectedYear] = useState("all");
   const [selectedResearcher, setSelectedResearcher] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+
+  /* ---- NEW: researcher searchbar state ---- */
+  const [researcherQuery, setResearcherQuery] = useState("");
+  const [isResearcherOpen, setIsResearcherOpen] = useState(false);
+  const researcherBoxRef = useRef(null);
 
   /* =========================================================
      CATEGORY LABELS (UI DISPLAY ONLY)
@@ -55,10 +60,38 @@ function Projects({ projects, setSelectedProject }) {
     });
   });
 
-  const uniqueResearchers = [
-    "all",
-    ...Array.from(researcherMap.values()).sort(),
-  ];
+  const uniqueResearchers = Array.from(researcherMap.values()).sort();
+
+  /* ---- NEW: filter researcher list by the searchbar query ---- */
+  const filteredResearchers = uniqueResearchers.filter((r) =>
+    r.toLowerCase().includes(researcherQuery.toLowerCase().trim())
+  );
+
+  /* ---- NEW: close the dropdown when clicking outside of it ---- */
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (
+        researcherBoxRef.current &&
+        !researcherBoxRef.current.contains(e.target)
+      ) {
+        setIsResearcherOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  function handleSelectResearcher(researcher) {
+    setSelectedResearcher(researcher);
+    setResearcherQuery(researcher);
+    setIsResearcherOpen(false);
+  }
+
+  function handleClearResearcher() {
+    setSelectedResearcher("all");
+    setResearcherQuery("");
+    setIsResearcherOpen(false);
+  }
 
   /* =========================================================
      SEARCH NORMALIZATION
@@ -150,22 +183,93 @@ function Projects({ projects, setSelectedProject }) {
             ))}
           </select>
 
-          {/* RESEARCHER */}
-          <select
-            value={selectedResearcher}
-            onChange={(e) => setSelectedResearcher(e.target.value)}
-            className="year-dropdown"
+          {/* ================= RESEARCHER SEARCHBAR ================= */}
+          <div
+            className="researcher-search"
+            ref={researcherBoxRef}
+            style={{ position: "relative", minWidth: "220px" }}
           >
-            <option value="all">Tous les chercheurs</option>
+            <input
+              type="text"
+              placeholder="Rechercher un chercheur..."
+              value={researcherQuery}
+              onChange={(e) => {
+                setResearcherQuery(e.target.value);
+                setIsResearcherOpen(true);
+                // typing freely clears a previously locked-in exact selection
+                if (selectedResearcher !== "all") setSelectedResearcher("all");
+              }}
+              onFocus={() => setIsResearcherOpen(true)}
+              className="year-dropdown"
+              style={{ width: "100%", paddingRight: "28px" }}
+            />
 
-            {uniqueResearchers
-              .filter((r) => r !== "all")
-              .map((researcher, i) => (
-                <option key={i} value={researcher}>
-                  {researcher}
-                </option>
-              ))}
-          </select>
+            {(researcherQuery || selectedResearcher !== "all") && (
+              <button
+                type="button"
+                onClick={handleClearResearcher}
+                aria-label="Effacer le filtre chercheur"
+                style={{
+                  position: "absolute",
+                  right: "8px",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  color: "#888",
+                  fontSize: "14px",
+                  lineHeight: 1,
+                }}
+              >
+                ✕
+              </button>
+            )}
+
+            {isResearcherOpen && (
+              <div
+                className="researcher-dropdown"
+                style={{
+                  position: "absolute",
+                  top: "calc(100% + 4px)",
+                  left: 0,
+                  right: 0,
+                  maxHeight: "240px",
+                  overflowY: "auto",
+                  background: "#fff",
+                  border: "1px solid #ddd",
+                  borderRadius: "8px",
+                  boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
+                  zIndex: 20,
+                }}
+              >
+                {filteredResearchers.length === 0 && (
+                  <div style={{ padding: "10px 12px", color: "#999", fontSize: "14px" }}>
+                    Aucun chercheur trouvé
+                  </div>
+                )}
+
+                {filteredResearchers.map((researcher) => (
+                  <div
+                    key={researcher}
+                    onClick={() => handleSelectResearcher(researcher)}
+                    style={{
+                      padding: "8px 12px",
+                      cursor: "pointer",
+                      fontSize: "14px",
+                      background:
+                        researcher.toLowerCase() === selectedResearcher.toLowerCase()
+                          ? "#f0f0f0"
+                          : "transparent",
+                    }}
+                    onMouseDown={(e) => e.preventDefault()} // keep focus, avoid blur-before-click
+                  >
+                    {researcher}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* ================= PROJECT LIST ================= */}
