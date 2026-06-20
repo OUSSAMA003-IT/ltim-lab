@@ -184,11 +184,7 @@ function Projects({ projects, setSelectedProject }) {
           </select>
 
           {/* ================= RESEARCHER SEARCHBAR ================= */}
-          <div
-            className="researcher-search"
-            ref={researcherBoxRef}
-            style={{ position: "relative", minWidth: "220px" }}
-          >
+          <div className="researcher-search" ref={researcherBoxRef}>
             <input
               type="text"
               placeholder="Rechercher un chercheur..."
@@ -200,8 +196,7 @@ function Projects({ projects, setSelectedProject }) {
                 if (selectedResearcher !== "all") setSelectedResearcher("all");
               }}
               onFocus={() => setIsResearcherOpen(true)}
-              className="year-dropdown"
-              style={{ width: "100%", paddingRight: "28px" }}
+              className="researcher-input"
             />
 
             {(researcherQuery || selectedResearcher !== "all") && (
@@ -209,59 +204,28 @@ function Projects({ projects, setSelectedProject }) {
                 type="button"
                 onClick={handleClearResearcher}
                 aria-label="Effacer le filtre chercheur"
-                style={{
-                  position: "absolute",
-                  right: "8px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  color: "#888",
-                  fontSize: "14px",
-                  lineHeight: 1,
-                }}
+                className="researcher-clear-btn"
               >
                 ✕
               </button>
             )}
 
             {isResearcherOpen && (
-              <div
-                className="researcher-dropdown"
-                style={{
-                  position: "absolute",
-                  top: "calc(100% + 4px)",
-                  left: 0,
-                  right: 0,
-                  maxHeight: "240px",
-                  overflowY: "auto",
-                  background: "#fff",
-                  border: "1px solid #ddd",
-                  borderRadius: "8px",
-                  boxShadow: "0 6px 16px rgba(0,0,0,0.12)",
-                  zIndex: 20,
-                }}
-              >
+              <div className="researcher-dropdown">
                 {filteredResearchers.length === 0 && (
-                  <div style={{ padding: "10px 12px", color: "#999", fontSize: "14px" }}>
-                    Aucun chercheur trouvé
-                  </div>
+                  <div className="researcher-empty">Aucun chercheur trouvé</div>
                 )}
 
                 {filteredResearchers.map((researcher) => (
                   <div
                     key={researcher}
                     onClick={() => handleSelectResearcher(researcher)}
-                    style={{
-                      padding: "8px 12px",
-                      cursor: "pointer",
-                      fontSize: "14px",
-                      background:
-                        researcher.toLowerCase() === selectedResearcher.toLowerCase()
-                          ? "#f0f0f0"
-                          : "transparent",
-                    }}
+                    className={
+                      "researcher-option" +
+                      (researcher.toLowerCase() === selectedResearcher.toLowerCase()
+                        ? " active"
+                        : "")
+                    }
                     onMouseDown={(e) => e.preventDefault()} // keep focus, avoid blur-before-click
                   >
                     {researcher}
