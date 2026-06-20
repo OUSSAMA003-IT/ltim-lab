@@ -1961,6 +1961,13 @@ input[type="date"] {
   .category-container button { padding: 8px 16px; font-size: 10px; }
   .subfilter-container { gap: 8px; }
   .year-dropdown { width: 100%; min-width: unset; font-size: 0.68rem; }
+  .researcher-search {
+    width: 100%;
+    min-width: unset;
+  }
+  .researcher-input {
+    font-size: 0.68rem;
+  }
 
   /* --- Partners --------------------------------------------- */
   .partners-section { padding: 60px 0; }
